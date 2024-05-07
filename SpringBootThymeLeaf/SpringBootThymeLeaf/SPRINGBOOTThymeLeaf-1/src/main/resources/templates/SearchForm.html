@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Employees</title>
+</head>
+<body>
+    <h2>Search Employees</h2>
+    <form th:action="@{/search}" method="get">
+        <input type="text" name="keyword" placeholder="Search by Name or Department">
+        <button type="submit">Filter</button>
+    </form>
+    <table>
+        <tr>
+            <th>EmpID</th>
+			<th>EmpName</th>
+			<th>Mail</th>
+        </tr>
+        	<tr th:each="emptemp:${employees}">
+			<td th:text="${emptemp.empId}"></td>
+			<td th:text="${emptemp.empName}"></td>
+			<td th:text="${emptemp.mail}"></td>
+            <td>
+                <a th:href="@{/showUpdateEmployeeForm/{empId}(empId=${emptemp.empId})}" class="btn btn-primary">Update</a>   
+                <a th:href="@{/showDeleteEmployeeForm/{empId}(empId=${emptemp.empId})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    </table>
+   			<a th:href="@{/showAddEmployeeForm}" class="btn btn-success">Add Employee</a>
+   			<a th:href="@{/search}" class="btn btn-success">Show All</a>
+   			<a th:href="@{/menu}" class="btn btn-success">Menu</a>
+</body>
+</html>
